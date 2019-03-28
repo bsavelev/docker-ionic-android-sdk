@@ -1,12 +1,12 @@
-FROM ubuntu:zesty
+FROM debian:9
 
 LABEL MAINTAINER="Weerayut Hongsa <kusumoto.com@gmail.com>"
 
-ARG NODEJS_VERSION="8"
-ARG IONIC_VERSION="3.19.0"
+ARG NODEJS_VERSION="10"
+ARG IONIC_VERSION="latest"
 ARG ANDROID_SDK_VERSION="3859397"
 ARG ANDROID_HOME="/opt/android-sdk"
-ARG ANDROID_BUILD_TOOLS_VERSION="26.0.0"
+ARG ANDROID_BUILD_TOOLS_VERSION="26.0.2"
 
 # 1) Install system package dependencies
 # 2) Install Nodejs/NPM/Ionic-Cli
@@ -25,6 +25,7 @@ RUN apt-get update \
        curl \
        unzip \
        git \
+       zipalign \
        gradle \
     && curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x | bash - \
     && apt-get update \
@@ -43,7 +44,3 @@ RUN apt-get update \
     && mkdir /ionicapp
 
 WORKDIR /ionicapp
-
-
-
-    
